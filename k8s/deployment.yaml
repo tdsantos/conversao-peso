@@ -1,0 +1,41 @@
+# Deployment da aplicação web conversao de peso
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec: 
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - name: web
+          image: bogusrj/conversao-peso:v1
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+          ports: 
+            - containerPort: 80
+--- 
+# Service da aplicação web conversao de peso
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec: 
+  selector:
+    app: web
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30000
+  type: NodePort
