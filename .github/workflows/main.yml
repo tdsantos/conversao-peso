@@ -22,7 +22,7 @@ jobs:
         uses: docker/build-push-action@v2.7.0
         with:
           context: ./ConversaoPeso.Web
-          file: ./ConversaoPeso.Web/dockerfile
+          file: ./ConversaoPeso.Web/Dockerfile
           push: true
           tags: |
             bogusrj/conversao-peso:latest
